@@ -1,12 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Animated } from 'react-native';
 import { Loading } from '@/components/atoms';
 import { delay } from '@/utils';
+import { nameBank } from '@/constants';
 
 export const SplashView = ({ onFinish }: { onFinish: () => void }) => {
-	const containerOpacity = useRef(new Animated.Value(1)).current;
-	const letters = 'BancoXYZ'.split('');
-	const letterAnims = useRef(letters.map(() => new Animated.Value(0))).current;
+	const [containerOpacity] = useState(() => new Animated.Value(1));
+	const letters = nameBank.split('');
+	const [letterAnims] = useState(() =>
+		letters.map(() => new Animated.Value(0))
+	);
 
 	useEffect(() => {
 		const start = async () => {
