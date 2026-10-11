@@ -11,12 +11,11 @@ export const colors = {
 		foreground: '#0A0A0A',
 		muted: '#F0F0F0',
 		mutedForeground: '#737373',
-		border: '#E5E5E5',
 		input: '#E5E5E5',
 		ring: sharedColors.secondary,
 		destructive: '#E7000B',
 		destructiveFocused: '#B00008',
-		destructiveFocusedBackground: 'rgba(127, 29, 29, 0.2)',
+		destructiveFocusedBackground: 'rgba(127, 29, 29, 0.1)',
 		destructiveForeground: '#FFFFFF'
 	},
 
@@ -26,7 +25,6 @@ export const colors = {
 		foreground: '#FAFAFA',
 		muted: '#262626',
 		mutedForeground: '#A1A1A1',
-		border: '#FFFFFF1A',
 		input: '#FFFFFF26',
 		ring: sharedColors.secondary,
 		destructive: '#FF6467',

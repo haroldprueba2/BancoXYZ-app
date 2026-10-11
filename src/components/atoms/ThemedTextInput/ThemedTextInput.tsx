@@ -4,30 +4,33 @@ import { useThemeColors } from '@/hooks';
 import { cn } from '@/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-const themedTextInputVariants = cva('w-full text-base text-foreground', {
-	variants: {
-		variant: {
-			outlined: 'min-h-14 px-4 pt-6 pb-2 border-2 rounded-xl',
-			line: 'border-b pb-2'
+const themedTextInputVariants = cva(
+	'w-full text-base text-foreground bg-transparent',
+	{
+		variants: {
+			variant: {
+				outlined: 'min-h-14 px-4 pt-6 pb-2 border rounded-xl',
+				line: 'border-b pb-2'
+			},
+			state: {
+				default: 'border-input',
+				focused: 'border-ring',
+				error: 'border-destructive bg-destructive-muted',
+				errorFocused:
+					'border-destructive-focused bg-destructive-focused-background'
+			},
+			disabled: {
+				true: 'opacity-60',
+				false: ''
+			}
 		},
-		state: {
-			default: 'border-input bg-input',
-			focused: 'border-ring bg-input',
-			error: 'border-destructive bg-destructive-muted',
-			errorFocused:
-				'border-destructive-focused bg-destructive-focused-background'
-		},
-		disabled: {
-			true: 'opacity-60',
-			false: ''
+		defaultVariants: {
+			variant: 'outlined',
+			state: 'default',
+			disabled: false
 		}
-	},
-	defaultVariants: {
-		variant: 'outlined',
-		state: 'default',
-		disabled: false
 	}
-});
+);
 
 export type ThemedTextInputVariant = NonNullable<
 	VariantProps<typeof themedTextInputVariants>['variant']
@@ -54,7 +57,6 @@ export const ThemedTextInput = forwardRef<TextInput, ThemedTextInputProps>(
 				ref={ref}
 				className={cn(
 					themedTextInputVariants({ variant, state, disabled }),
-					variant === 'line' && 'bg-transparent',
 					className
 				)}
 				placeholderTextColor={placeholderTextColor ?? colors.mutedForeground}

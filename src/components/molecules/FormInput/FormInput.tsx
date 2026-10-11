@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, type TextInputProps } from 'react-native';
 import { cn } from '@/utils';
 import {
@@ -8,7 +8,7 @@ import {
 	type FieldValues
 } from 'react-hook-form';
 import {
-	FormInputLabel,
+	FormLabel,
 	PasswordVisibilityToggle,
 	ThemedText,
 	ThemedTextInput
@@ -62,16 +62,16 @@ export const FormInput = <T extends FieldValues>({
 
 				return (
 					<View className="mb-4 w-full">
-						{label && (
-							<FormInputLabel
-								label={label}
-								required={required}
-								hasError={!!error}
-								variant={variant}
-							/>
-						)}
-
 						<View className="relative">
+							{label && (
+								<FormLabel
+									label={label}
+									required={required}
+									hasError={!!error}
+									variant={variant}
+								/>
+							)}
+
 							<ThemedTextInput
 								{...textInputProps}
 								ref={ref}

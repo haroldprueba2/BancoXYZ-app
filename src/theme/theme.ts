@@ -10,7 +10,6 @@ const createThemeVars = (themeColors: ThemeColors) =>
 		'--foreground': themeColors.foreground,
 		'--muted': themeColors.muted,
 		'--muted-foreground': themeColors.mutedForeground,
-		'--border': themeColors.border,
 		'--input': themeColors.input,
 		'--ring': themeColors.ring,
 		'--destructive': themeColors.destructive,
