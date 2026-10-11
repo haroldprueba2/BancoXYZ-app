@@ -1,43 +1,24 @@
 import '../../global.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Stack, usePathname, useRouter } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AppContextProvider } from '@/context/AppContext';
-import { SplashView } from '@/components/screens';
-import { AppThemeRoot } from '@/theme';
+import { useAuthStore } from '@/modules/auth/store/useAuthStore';
 import { useThemeColors } from '@/hooks';
 import { ArrowLeftIcon } from 'phosphor-react-native';
 
-SplashScreen.preventAutoHideAsync();
-
 export default function AppLayout() {
-	const [isAppReady, setIsAppReady] = useState(false);
-
 	return (
 		<AppContextProvider>
-			<AppThemeRoot>
-				{!isAppReady ? (
-					<SplashView onFinish={() => setIsAppReady(true)} />
-				) : (
-					<SafeAreaProvider>
-						<GestureHandlerRootView style={{ flex: 1 }}>
-							<TabLayout />
-						</GestureHandlerRootView>
-					</SafeAreaProvider>
-				)}
-			</AppThemeRoot>
+			<AuthLayout />
 		</AppContextProvider>
 	);
 }
 
-const isAuthenticated = false;
-
-function TabLayout() {
+function AuthLayout() {
 	const router = useRouter();
 	const pathname = usePathname();
+	const { isAuthenticated } = useAuthStore();
 	const colors = useThemeColors();
 	const handleBack = () => {
 		if (pathname === '/auth/login') {
@@ -53,7 +34,7 @@ function TabLayout() {
 				screenOptions={{
 					headerShown: true,
 					headerStyle: { backgroundColor: colors.primary },
-					headerTintColor: 'blue',
+					headerTintColor: colors.secondary,
 					headerTitleAlign: 'center',
 					animation: 'slide_from_right',
 					headerLeft: () => (
@@ -74,6 +55,9 @@ function TabLayout() {
 							headerTitle: 'Login'
 						}}
 					/>
+				</Stack.Protected>
+				<Stack.Protected guard={isAuthenticated}>
+					<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 				</Stack.Protected>
 			</Stack>
 		</React.Fragment>

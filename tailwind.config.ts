@@ -22,7 +22,6 @@ module.exports = {
 					DEFAULT: 'var(--muted)',
 					foreground: 'var(--muted-foreground)'
 				},
-				border: 'var(--border)',
 				input: 'var(--input)',
 				ring: 'var(--ring)',
 				destructive: {

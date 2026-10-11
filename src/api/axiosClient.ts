@@ -1,29 +1,41 @@
-import { default as axios } from 'axios';
-// import { StorageAdapter } from '@/adapters/storage-adapter';
+import * as axios from 'axios';
+import { StorageAdapter } from '@/infrastructure/adapters';
 import { parseAxiosError } from '@/utils';
 
-const axiosClient = axios.create({
-	headers: {
-		'Content-Type': 'application/json'
+const createAxiosClient = (baseURL: string | undefined, withAuth = true) => {
+	const axiosClient = axios.create({
+		baseURL,
+		timeout: 150000,
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json'
+		}
+	});
+
+	if (withAuth) {
+		axiosClient.interceptors.request.use(
+			async (config) => {
+				const accessToken = await StorageAdapter.getItem('accessToken');
+
+				if (accessToken) {
+					config.headers.Authorization = `Bearer ${accessToken}`;
+				}
+
+				return config;
+			},
+			(error) => Promise.reject(error)
+		);
 	}
-});
 
-axiosClient.interceptors.request.use(
-	async (config) => {
-		// const accessToken = await StorageAdapter.getItem('accessToken');
+	axiosClient.interceptors.response.use(
+		(response) => response,
+		(error) => Promise.reject(parseAxiosError(error))
+	);
 
-		// if (accessToken) {
-		// 	config.headers.Authorization = `Bearer ${accessToken}`;
-		// }
+	return axiosClient;
+};
 
-		return config;
-	},
-	(error) => Promise.reject(error)
+export const axiosAuthClient = createAxiosClient(
+	process.env.EXPO_PUBLIC_AUTH_API_URL,
+	false
 );
-
-axiosClient.interceptors.response.use(
-	(response) => response,
-	(error) => Promise.reject(parseAxiosError(error))
-);
-
-export default axiosClient;

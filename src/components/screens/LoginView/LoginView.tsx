@@ -1,31 +1,24 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'expo-router';
+import { View } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { TouchableOpacity, View } from 'react-native';
-import { z } from 'zod';
-import { loginFormSchema } from '@/modules/auth/validation/loginFormSchema';
-// import { useAuthStore } from '@/modules/auth/store/useAuthStore';
+import {
+	LoginFormData,
+	loginFormSchema
+} from '@/modules/auth/validation/loginFormSchema';
+import { useAuthStore } from '@/modules/auth/store/useAuthStore';
 import { BankTitle, ThemedButton, ThemedText } from '@/components/atoms';
 import { FormInput } from '@/components/molecules';
+import { setFormError } from '@/utils';
+import { ApiError } from '@/infrastructure/interfaces';
 import { SignInIcon } from 'phosphor-react-native';
 
-// import { ApiError } from '@/infrastructure/interfaces';
-// import { setFormError } from '@/utils';
-
-type LoginFormData = z.infer<typeof loginFormSchema>;
-
 export const LoginView = () => {
-	// const { login } = useAuthStore();
-
-	const [loading, setLoading] = useState(false);
+	const { login, loading } = useAuthStore();
 
 	const {
 		control,
 		handleSubmit,
 		setError,
-		clearErrors,
-		watch,
 		formState: { errors }
 	} = useForm<LoginFormData>({
 		resolver: zodResolver(loginFormSchema),
@@ -36,36 +29,21 @@ export const LoginView = () => {
 		}
 	});
 
-	const onLogin = async (
-		// data: LoginFormData
-	) => {
-		// setLoading(true);
-		// try {
-		// 	await login(data.email, data.password);
-		// } catch (error) {
-		// 	const errorObj = error as ApiError;
-		// 	if (errorObj.statusCode === 401) {
-		// 		setError('root', {
-		// 			type: 'custom',
-		// 			message: 'Invalid credentials'
-		// 		});
-		// 		return;
-		// 	}
-		// 	setFormError(setError, error);
-		// } finally {
-		// 	setLoading(false);
-		// }
+	const onLogin = async (data: LoginFormData) => {
+		try {
+			await login(data);
+		} catch (error: any) {
+			const errorObj = error as ApiError;
+			if (errorObj.status === 401) {
+				setError('root', {
+					type: 'custom',
+					message: 'Credenciales incorrectas. Inténtalo de nuevo.'
+				});
+				return;
+			}
+			setFormError(setError, errorObj);
+		}
 	};
-
-	// useEffect(() => {
-	// 	const subscription = watch(() => {
-	// 		if (errors.root) {
-	// 			clearErrors('root');
-	// 		}
-	// 	});
-
-	// 	return () => subscription.unsubscribe();
-	// }, [watch, errors.root, clearErrors]);
 
 	return (
 		<View className="flex-1 justify-center m-6">
@@ -101,6 +79,11 @@ export const LoginView = () => {
 				isPassword={true}
 				disabled={loading}
 			/>
+			{errors.root && (
+				<ThemedText className="mb-4 text-destructive">
+					{errors.root.message}
+				</ThemedText>
+			)}
 			<ThemedButton
 				title="Iniciar Sesión"
 				variant="secondary"
