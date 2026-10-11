@@ -15,6 +15,8 @@ const createThemeVars = (themeColors: ThemeColors) =>
 		'--ring': themeColors.ring,
 		'--destructive': themeColors.destructive,
 		'--destructive-focused': themeColors.destructiveFocused,
+		'--destructive-focused-background':
+			themeColors.destructiveFocusedBackground,
 		'--destructive-foreground': themeColors.destructiveForeground
 	});
 

@@ -16,6 +16,7 @@ export const colors = {
 		ring: sharedColors.secondary,
 		destructive: '#E7000B',
 		destructiveFocused: '#B00008',
+		destructiveFocusedBackground: 'rgba(127, 29, 29, 0.2)',
 		destructiveForeground: '#FFFFFF'
 	},
 
@@ -30,6 +31,7 @@ export const colors = {
 		ring: sharedColors.secondary,
 		destructive: '#FF6467',
 		destructiveFocused: '#FF8587',
+		destructiveFocusedBackground: 'rgba(127, 29, 29, 0.2)',
 		destructiveForeground: '#0A0A0A'
 	}
 } as const;

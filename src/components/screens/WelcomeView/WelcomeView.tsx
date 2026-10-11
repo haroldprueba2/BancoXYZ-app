@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ThemedButton, ThemedText } from '@/components/atoms';
+import { BankTitle, ThemedButton, ThemedText } from '@/components/atoms';
 import { ArrowRightIcon } from 'phosphor-react-native';
 import { getInitialLetter } from '@/utils';
 import { nameBank } from '@/constants';
@@ -17,13 +17,13 @@ export const WelcomeView = () => {
 			}}
 		>
 			<View className="flex-row items-center gap-3">
-				<View className="h-16 w-16 items-center justify-center rounded-xl bg-primary">
+				<View className="h-16 w-16 items-center justify-center rounded-xl border-2 border-primary">
 					<ThemedText className="text-2xl font-bold">
 						{getInitialLetter(nameBank)}
 					</ThemedText>
 				</View>
 				<View>
-					<ThemedText className="text-lg font-bold">{nameBank}</ThemedText>
+					<BankTitle />
 					<ThemedText className="text-xs text-muted-foreground">
 						BANCA DIGITAL
 					</ThemedText>

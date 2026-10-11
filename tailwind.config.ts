@@ -29,7 +29,9 @@ module.exports = {
 					DEFAULT: 'var(--destructive)',
 					foreground: 'var(--destructive-foreground)'
 				},
-				'destructive-focused': 'var(--destructive-focused)'
+				'destructive-focused': 'var(--destructive-focused)',
+				'destructive-focused-background':
+					'var(--destructive-focused-background)'
 			}
 		}
 	},

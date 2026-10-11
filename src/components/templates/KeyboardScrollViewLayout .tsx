@@ -12,6 +12,7 @@ export const KeyboardScrollViewLayout = ({
 }: ScrollViewLayoutProps) => {
 	return (
 		<KeyboardAwareScrollView
+			mode="layout"
 			bottomOffset={bottomOffset}
 			keyboardShouldPersistTaps="handled"
 			contentContainerStyle={{ flexGrow: 1 }}
