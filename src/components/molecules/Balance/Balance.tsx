@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { View } from 'react-native';
-import { ThemedButton, ThemedText, ViewCard } from '@/components/atoms';
+import {
+	Skeleton,
+	ThemedButton,
+	ThemedText,
+	ViewCard
+} from '@/components/atoms';
 import { useThemeColors } from '@/hooks';
 import { formatCurrency } from '@/utils';
 import { EyeIcon, EyeSlashIcon } from 'phosphor-react-native';
@@ -31,9 +36,8 @@ export const Balance = ({ balance, currency, loading }: BalanceProps) => {
 					<ThemedText className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
 						Balance Disponible
 					</ThemedText>
-
 					{loading ? (
-						<View className="h-10 w-44 animate-pulse rounded-lg bg-muted" />
+						<Skeleton className="w-40" />
 					) : (
 						<ThemedText
 							className="text-3xl font-bold"
@@ -44,7 +48,6 @@ export const Balance = ({ balance, currency, loading }: BalanceProps) => {
 						</ThemedText>
 					)}
 				</View>
-
 				<View className="justify-center">
 					<ThemedButton
 						variant="icon"

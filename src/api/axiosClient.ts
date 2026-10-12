@@ -29,7 +29,15 @@ const createAxiosClient = (baseURL: string | undefined, withAuth = true) => {
 
 	axiosClient.interceptors.response.use(
 		(response) => response,
-		(error) => Promise.reject(parseAxiosError(error))
+		async (error) => {
+			if (error.response?.status === 401) {
+				const { useAuthStore } =
+					await import('@/modules/auth/store/useAuthStore');
+				useAuthStore.getState().logout();
+			}
+
+			return Promise.reject(parseAxiosError(error));
+		}
 	);
 
 	return axiosClient;
@@ -38,4 +46,8 @@ const createAxiosClient = (baseURL: string | undefined, withAuth = true) => {
 export const axiosAuthClient = createAxiosClient(
 	process.env.EXPO_PUBLIC_AUTH_API_URL,
 	false
+);
+
+export const axiosBalanceClient = createAxiosClient(
+	process.env.EXPO_PUBLIC_BALANCE_API_URL
 );

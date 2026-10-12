@@ -6,3 +6,4 @@ export * from './BankTitle';
 export * from './FormLabel';
 export * from './PasswordVisibilityToggle';
 export * from './ViewCard';
+export * from './Skeleton';

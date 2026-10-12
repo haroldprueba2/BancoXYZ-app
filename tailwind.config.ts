@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	darkMode: 'class',
 	content: [
 		'./App.tsx',
 		'./src/app/**/*.{js,jsx,ts,tsx}',
@@ -28,9 +27,5 @@ module.exports = {
 					'var(--destructive-focused-background)'
 			}
 		}
-	},
-	future: {
-		hoverOnlyWhenSupported: true
-	},
-	plugins: [require('tailwindcss-animate')]
+	}
 };
