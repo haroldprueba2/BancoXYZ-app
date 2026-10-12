@@ -17,7 +17,7 @@ export const HomeView = () => {
 	});
 
 	return (
-		<SafeAreaView className="flex-1 bg-background">
+		<SafeAreaView className="flex-1">
 			<View className="flex-1 gap-6 px-5 py-4">
 				<View className="flex-row items-center gap-3">
 					<View className="h-14 w-14 items-center justify-center rounded-full">
@@ -27,8 +27,6 @@ export const HomeView = () => {
 						<ThemedText className="text-sm text-muted-foreground">
 							Bienvenido
 						</ThemedText>
-
-						{}
 						<ThemedText className="text-xl font-bold" numberOfLines={1}>
 							{user?.name ?? 'Usuario'}
 						</ThemedText>

@@ -12,8 +12,8 @@ export const WelcomeView = () => {
 		<View
 			className="flex-1 px-6"
 			style={{
-				paddingTop: insets.top + 10,
-				paddingBottom: insets.bottom + 10
+				paddingTop: insets.top + 20,
+				paddingBottom: insets.bottom + 20
 			}}
 		>
 			<View className="flex-row items-center gap-3">

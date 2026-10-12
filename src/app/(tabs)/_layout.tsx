@@ -1,6 +1,5 @@
 import { Tabs } from 'expo-router';
-
-import { HouseIcon } from 'phosphor-react-native';
+import { HouseIcon, SwapIcon } from 'phosphor-react-native';
 import { useThemeColors } from '@/hooks';
 
 export default function TabsLayout() {
@@ -8,19 +7,18 @@ export default function TabsLayout() {
 	return (
 		<Tabs
 			screenOptions={{
-				headerShown: true,
-				headerStyle: { backgroundColor: colors.primary },
-				headerTintColor: colors.secondary,
-				headerTitleAlign: 'center',
+				headerShown: false,
+				sceneStyle: { backgroundColor: colors.background },
 				tabBarActiveTintColor: colors.secondary,
-				tabBarInactiveTintColor: 'white',
+				tabBarInactiveTintColor: colors.foreground,
 				tabBarActiveBackgroundColor: colors.background,
-				animation: 'none',
+				animation: 'shift',
 				tabBarStyle: {
 					backgroundColor: colors.background,
 					borderTopWidth: 0,
 					elevation: 0
 				},
+				title: '',
 				popToTopOnBlur: true,
 				tabBarHideOnKeyboard: true
 			}}
@@ -29,11 +27,16 @@ export default function TabsLayout() {
 			<Tabs.Screen
 				name="home"
 				options={{
-					title: 'Inicio',
-					headerShown: false,
-					popToTopOnBlur: true,
-					tabBarIcon: ({ focused }) => (
-						<HouseIcon size={24} color={focused ? colors.secondary : 'white'} />
+					tabBarIcon: ({ color }) => (
+						<HouseIcon size={24} color={String(color)} />
+					)
+				}}
+			/>
+			<Tabs.Screen
+				name="transfer"
+				options={{
+					tabBarIcon: ({ color }) => (
+						<SwapIcon size={24} color={String(color)} />
 					)
 				}}
 			/>
