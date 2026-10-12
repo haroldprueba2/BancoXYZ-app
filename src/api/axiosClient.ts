@@ -15,10 +15,10 @@ const createAxiosClient = (baseURL: string | undefined, withAuth = true) => {
 	if (withAuth) {
 		axiosClient.interceptors.request.use(
 			async (config) => {
-				const accessToken = await StorageAdapter.getItem('accessToken');
+				const token = await StorageAdapter.getItem('token');
 
-				if (accessToken) {
-					config.headers.Authorization = `Bearer ${accessToken}`;
+				if (token) {
+					config.headers.Authorization = `Bearer ${token}`;
 				}
 
 				return config;

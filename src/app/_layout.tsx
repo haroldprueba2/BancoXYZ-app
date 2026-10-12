@@ -33,9 +33,10 @@ function AuthLayout() {
 			<Stack
 				screenOptions={{
 					headerShown: true,
-					headerStyle: { backgroundColor: colors.primary },
+					headerStyle: { backgroundColor: colors.background },
 					headerTintColor: colors.secondary,
 					headerTitleAlign: 'center',
+					headerShadowVisible: false,
 					animation: 'slide_from_right',
 					headerLeft: () => (
 						<TouchableOpacity onPress={handleBack}>
@@ -52,7 +53,7 @@ function AuthLayout() {
 					<Stack.Screen
 						name="auth/login/index"
 						options={{
-							headerTitle: 'Login'
+							headerTitle: ''
 						}}
 					/>
 				</Stack.Protected>

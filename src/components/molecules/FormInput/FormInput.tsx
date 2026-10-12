@@ -69,6 +69,7 @@ export const FormInput = <T extends FieldValues>({
 									required={required}
 									hasError={!!error}
 									variant={variant}
+									disabled={disabled}
 								/>
 							)}
 

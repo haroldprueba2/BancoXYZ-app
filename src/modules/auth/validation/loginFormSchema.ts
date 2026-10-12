@@ -3,13 +3,13 @@ import { z } from 'zod';
 export const loginFormSchema = z.object({
 	email: z
 		.string()
-		.min(1, 'Email is required')
-		.email({ message: 'Invalid email address' }),
+		.min(1, 'El email es requerido')
+		.email({ message: 'El email no es válido' }),
 	password: z
 		.string()
-		.min(1, 'Password is required')
-		.min(4, 'Password must be at least 4 characters')
-		.max(20, 'Password can have a maximum of 20 characters')
+		.min(1, 'La contraseña es requerida')
+		.min(4, 'La contraseña debe tener al menos 4 caracteres')
+		.max(20, 'La contraseña puede tener máximo 20 caracteres')
 });
 
 export type LoginFormData = z.infer<typeof loginFormSchema>;

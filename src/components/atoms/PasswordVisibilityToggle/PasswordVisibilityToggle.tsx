@@ -19,11 +19,14 @@ export const PasswordVisibilityToggle = ({
 }: PasswordVisibilityToggleProps) => {
 	const colors = useThemeColors();
 
-	const iconColor = hasError
-		? colors.destructiveFocused
-		: focused
-			? colors.ring
-			: colors.mutedForeground;
+	const getIconColor = () => {
+		if (disabled) return colors.mutedForeground;
+		if (hasError) return colors.destructiveFocused;
+		if (focused) return colors.ring;
+		return colors.foreground;
+	};
+
+	const iconColor = getIconColor();
 
 	return (
 		<TouchableOpacity

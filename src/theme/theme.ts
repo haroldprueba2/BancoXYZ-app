@@ -14,9 +14,7 @@ const createThemeVars = (themeColors: ThemeColors) =>
 		'--ring': themeColors.ring,
 		'--destructive': themeColors.destructive,
 		'--destructive-focused': themeColors.destructiveFocused,
-		'--destructive-focused-background':
-			themeColors.destructiveFocusedBackground,
-		'--destructive-foreground': themeColors.destructiveForeground
+		'--destructive-focused-background': themeColors.destructiveFocusedBackground
 	});
 
 export const themes = {

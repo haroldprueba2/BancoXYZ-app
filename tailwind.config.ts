@@ -18,16 +18,11 @@ module.exports = {
 				background: 'var(--background)',
 				card: 'var(--card)',
 				foreground: 'var(--foreground)',
-				muted: {
-					DEFAULT: 'var(--muted)',
-					foreground: 'var(--muted-foreground)'
-				},
+				muted: 'var(--muted)',
+				'muted-foreground': 'var(--muted-foreground)',
 				input: 'var(--input)',
 				ring: 'var(--ring)',
-				destructive: {
-					DEFAULT: 'var(--destructive)',
-					foreground: 'var(--destructive-foreground)'
-				},
+				destructive: 'var(--destructive)',
 				'destructive-focused': 'var(--destructive-focused)',
 				'destructive-focused-background':
 					'var(--destructive-focused-background)'

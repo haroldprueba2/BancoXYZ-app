@@ -32,7 +32,7 @@ export const LoginView = () => {
 	const onLogin = async (data: LoginFormData) => {
 		try {
 			await login(data);
-		} catch (error: any) {
+		} catch (error) {
 			const errorObj = error as ApiError;
 			if (errorObj.status === 401) {
 				setError('root', {
@@ -66,7 +66,7 @@ export const LoginView = () => {
 				control={control}
 				name="email"
 				label="Email"
-				placeholder="Enter your email"
+				placeholder="Ingresa tu email"
 				disabled={loading}
 			/>
 			<FormInput
@@ -74,8 +74,8 @@ export const LoginView = () => {
 				control={control}
 				autoCapitalize="none"
 				name="password"
-				label="Password"
-				placeholder="Enter your password"
+				label="Contraseña"
+				placeholder="Ingresa tu contraseña"
 				isPassword={true}
 				disabled={loading}
 			/>
