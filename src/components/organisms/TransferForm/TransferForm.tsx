@@ -10,7 +10,11 @@ import {
 	TransferFormData
 } from '@/modules/transfer/validation/transferFormSchema';
 import { ThemedButton } from '@/components/atoms';
-import { FeedbackMessage, FormInput } from '@/components/molecules';
+import {
+	FeedbackMessage,
+	FormAmountInput,
+	FormInput
+} from '@/components/molecules';
 import { formatDate } from '@/utils';
 import { ApiError } from '@/infrastructure/interfaces';
 import { PaperPlaneTiltIcon } from 'phosphor-react-native';
@@ -26,7 +30,7 @@ export const TransferForm = ({ balance, currency }: TransferFormProps) => {
 		type: 'success' | 'error';
 	} | null>(null);
 
-	const { control, handleSubmit, reset } = useForm<TransferFormData>({
+	const { control, handleSubmit, setFocus, reset } = useForm<TransferFormData>({
 		resolver: zodResolver(createTransferFormSchema(balance)),
 		mode: 'onChange',
 		defaultValues: {
@@ -69,16 +73,18 @@ export const TransferForm = ({ balance, currency }: TransferFormProps) => {
 
 	useFocusEffect(
 		useCallback(() => {
+			setFocus('amount');
+
 			return () => {
 				reset();
 				setMessage(null);
 			};
-		}, [reset])
+		}, [reset, setFocus])
 	);
 
 	return (
 		<View>
-			<FormInput
+			<FormAmountInput
 				autoFocus
 				required
 				keyboardType="number-pad"
