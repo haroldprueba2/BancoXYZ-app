@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import { KeyboardContextProvider } from '.';
+import { KeyboardContextProvider, ReactQueryContextProvider } from '.';
 import { AppThemeRoot } from '@/theme';
 import { SplashView } from '@/components/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -22,17 +22,19 @@ export function AppContextProvider({ children }: AppContextProps) {
 
 	return (
 		<KeyboardContextProvider>
-			<AppThemeRoot>
-				{!isAppReady ? (
-					<SplashView onFinish={handleFinish} />
-				) : (
-					<SafeAreaProvider>
-						<GestureHandlerRootView style={{ flex: 1 }}>
-							{children}
-						</GestureHandlerRootView>
-					</SafeAreaProvider>
-				)}
-			</AppThemeRoot>
+			<ReactQueryContextProvider>
+				<AppThemeRoot>
+					{!isAppReady ? (
+						<SplashView onFinish={handleFinish} />
+					) : (
+						<SafeAreaProvider>
+							<GestureHandlerRootView style={{ flex: 1 }}>
+								{children}
+							</GestureHandlerRootView>
+						</SafeAreaProvider>
+					)}
+				</AppThemeRoot>
+			</ReactQueryContextProvider>
 		</KeyboardContextProvider>
 	);
 }
