@@ -1,11 +1,7 @@
 import { cloneElement, type ReactElement } from 'react';
-import {
-	ActivityIndicator,
-	Pressable,
-	View,
-	type PressableProps
-} from 'react-native';
+import { Pressable, type PressableProps } from 'react-native';
 import { ThemedText } from '../ThemedText';
+import { Loading } from '../Loading';
 import { cn } from '@/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type { IconProps } from 'phosphor-react-native';
@@ -18,7 +14,8 @@ const buttonVariants = cva(
 				primary: 'bg-primary',
 				secondary: 'bg-secondary',
 				outline: 'border border-primary bg-transparent',
-				error: 'bg-destructive'
+				error: 'bg-destructive',
+				icon: 'bg-transparent'
 			},
 			size: {
 				xs: 'min-h-6',
@@ -41,7 +38,8 @@ const textVariants = cva('font-semibold', {
 			primary: 'text-white',
 			secondary: 'text-white',
 			outline: 'text-primary',
-			error: 'text-white'
+			error: 'text-white',
+			icon: 'text-foreground'
 		},
 		size: {
 			xs: 'text-xs',
@@ -57,9 +55,10 @@ const textVariants = cva('font-semibold', {
 	}
 });
 
-type ThemedButtonButtonProps = Omit<PressableProps, 'children'> &
+type ThemedButtonProps = Omit<PressableProps, 'children'> &
 	VariantProps<typeof buttonVariants> & {
-		title: string;
+		title?: string;
+		icon?: ReactElement<IconProps>;
 		iconLeft?: ReactElement<IconProps>;
 		iconRight?: ReactElement<IconProps>;
 		loading?: boolean;
@@ -68,6 +67,7 @@ type ThemedButtonButtonProps = Omit<PressableProps, 'children'> &
 
 export const ThemedButton = ({
 	title,
+	icon,
 	iconLeft,
 	iconRight,
 	fullWidth = true,
@@ -77,14 +77,19 @@ export const ThemedButton = ({
 	className,
 	disabled,
 	...props
-}: ThemedButtonButtonProps) => {
+}: ThemedButtonProps) => {
 	const isDisabled = disabled || loading;
+
+	const renderIcon = (element: ReactElement<IconProps>) =>
+		cloneElement(element, {
+			color: element.props.color ?? 'white'
+		});
 
 	return (
 		<Pressable
 			className={cn(
 				buttonVariants({ variant, size }),
-				fullWidth ? 'w-full' : 'self-start',
+				fullWidth && !icon ? 'w-full' : 'self-start',
 				isDisabled && 'opacity-60',
 				className
 			)}
@@ -92,30 +97,24 @@ export const ThemedButton = ({
 			{...props}
 		>
 			{loading ? (
-				<ActivityIndicator color="white" />
+				<Loading size="small" className="text-white" />
+			) : icon ? (
+				renderIcon(icon)
 			) : (
 				<>
-					{iconLeft && (
-						<View>
-							{cloneElement(iconLeft, {
-								color: iconLeft.props.color ?? 'white'
-							})}
-						</View>
+					{iconLeft && renderIcon(iconLeft)}
+
+					{title && (
+						<ThemedText
+							numberOfLines={1}
+							size="inherit"
+							className={cn(textVariants({ variant, size }))}
+						>
+							{title}
+						</ThemedText>
 					)}
-					<ThemedText
-						numberOfLines={1}
-						size="inherit"
-						className={cn(textVariants({ variant, size }))}
-					>
-						{title}
-					</ThemedText>
-					{iconRight && (
-						<View>
-							{cloneElement(iconRight, {
-								color: iconRight.props.color ?? 'white'
-							})}
-						</View>
-					)}
+
+					{iconRight && renderIcon(iconRight)}
 				</>
 			)}
 		</Pressable>

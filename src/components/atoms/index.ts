@@ -5,3 +5,4 @@ export * from './ThemedTextInput';
 export * from './BankTitle';
 export * from './FormLabel';
 export * from './PasswordVisibilityToggle';
+export * from './ViewCard';

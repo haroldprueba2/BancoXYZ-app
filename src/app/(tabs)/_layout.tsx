@@ -1,8 +1,10 @@
 import { Tabs } from 'expo-router';
-import { colors } from '@/constants/colors';
+
 import { HouseIcon } from 'phosphor-react-native';
+import { useThemeColors } from '@/hooks';
 
 export default function TabsLayout() {
+	const colors = useThemeColors();
 	return (
 		<Tabs
 			screenOptions={{
@@ -10,12 +12,14 @@ export default function TabsLayout() {
 				headerStyle: { backgroundColor: colors.primary },
 				headerTintColor: colors.secondary,
 				headerTitleAlign: 'center',
-				tabBarActiveTintColor: colors.primary,
+				tabBarActiveTintColor: colors.secondary,
 				tabBarInactiveTintColor: 'white',
-				tabBarActiveBackgroundColor: colors.secondary,
+				tabBarActiveBackgroundColor: colors.background,
 				animation: 'none',
 				tabBarStyle: {
-					backgroundColor: colors.secondary
+					backgroundColor: colors.background,
+					borderTopWidth: 0,
+					elevation: 0
 				},
 				popToTopOnBlur: true,
 				tabBarHideOnKeyboard: true
@@ -29,7 +33,7 @@ export default function TabsLayout() {
 					headerShown: false,
 					popToTopOnBlur: true,
 					tabBarIcon: ({ focused }) => (
-						<HouseIcon size={24} color={focused ? colors.primary : 'white'} />
+						<HouseIcon size={24} color={focused ? colors.secondary : 'white'} />
 					)
 				}}
 			/>
