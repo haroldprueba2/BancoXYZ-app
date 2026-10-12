@@ -1,9 +1,9 @@
 import { axiosBalanceClient } from '@/api/axiosClient';
-import { Balance } from '../interfaces/balance';
+import { BalanceResponse } from '../interfaces/balance';
 
 export const getBalance = async () => {
 	try {
-		const { data } = await axiosBalanceClient.get<Balance>('/balance');
+		const { data } = await axiosBalanceClient.get<BalanceResponse>('/balance');
 
 		return data;
 	} catch (error) {

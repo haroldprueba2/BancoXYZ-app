@@ -26,7 +26,7 @@ export default function TransferLayout() {
 				}
 			}}
 		>
-			<Stack.Screen name="index" options={{ title: 'Transferir Monto' }} />
+			<Stack.Screen name="index" options={{ title: 'Enviar Dinero' }} />
 		</Stack>
 	);
 }

@@ -7,7 +7,7 @@ import { useThemeColors } from '@/hooks';
 const themedTextInputVariants = cva('w-full bg-transparent', {
 	variants: {
 		variant: {
-			outlined: 'min-h-14 border rounded-xl px-4 pt-6 pb-2',
+			outlined: 'min-h-16 border rounded-xl px-4 pt-6 pb-2',
 			line: 'border-b pb-2'
 		},
 		state: {

@@ -1,4 +1,4 @@
-export interface Balance {
+export interface BalanceResponse {
 	currency: string;
 	accountBalance: number;
 }

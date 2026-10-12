@@ -51,3 +51,7 @@ export const axiosAuthClient = createAxiosClient(
 export const axiosBalanceClient = createAxiosClient(
 	process.env.EXPO_PUBLIC_BALANCE_API_URL
 );
+
+export const axiosTransferClient = createAxiosClient(
+	process.env.EXPO_PUBLIC_TRANSFER_API_URL
+);
