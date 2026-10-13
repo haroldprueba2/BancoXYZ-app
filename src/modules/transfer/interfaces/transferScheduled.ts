@@ -3,5 +3,4 @@ export interface TransferScheduled {
 	amount: string;
 	payeerDocument: string;
 	scheduledDate: string;
-	createdAt: Date;
 }

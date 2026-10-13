@@ -22,18 +22,7 @@ export const transferScheduledFormSchema = z.object({
 		.regex(/^\d+$/, 'El documento solo debe contener números')
 		.min(5, 'El documento debe tener al menos 5 dígitos')
 		.max(20, 'El documento no puede superar los 20 dígitos'),
-	scheduledDate: z.string().min(1, 'Please select a date')
-	// .refine(
-	// 	(date) => {
-	// 		const selectedDate = new Date(date);
-	// 		const today = new Date();
-	// 		today.setHours(0, 0, 0, 0);
-	// 		return selectedDate > today;
-	// 	},
-	// 	{
-	// 		message: 'The date must be a future date (tomorrow onwards)'
-	// 	}
-	// )
+	scheduledDate: z.iso.date('La fecha es requerida')
 });
 
 export type TransferScheduledFormData = z.infer<

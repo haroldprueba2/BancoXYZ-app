@@ -2,16 +2,17 @@ import { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import * as Crypto from 'expo-crypto';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemedButton } from '@/components/atoms';
 import {
+	DateTimePickerField,
 	FeedbackMessage,
 	FormAmountInput,
 	FormInput
 } from '@/components/molecules';
-import { delay, formatDate } from '@/utils';
+import { delay } from '@/utils';
 import { CalendarPlusIcon } from 'phosphor-react-native';
 import {
 	TransferScheduledFormData,
@@ -31,7 +32,14 @@ export const TransferScheduledForm = ({
 		type: 'success' | 'error';
 	} | null>(null);
 
-	const { control, handleSubmit, reset } = useForm<TransferScheduledFormData>({
+	const {
+		control,
+		handleSubmit,
+		setValue,
+
+		formState: { errors },
+		reset
+	} = useForm<TransferScheduledFormData>({
 		resolver: zodResolver(transferScheduledFormSchema),
 		mode: 'onChange',
 		defaultValues: {
@@ -41,25 +49,19 @@ export const TransferScheduledForm = ({
 		}
 	});
 
+	const scheduledDate = useWatch({
+		control,
+		name: 'scheduledDate'
+	});
+
 	const { mutateAsync: transferMutation, isPending: isPendingTransfer } =
 		useMutation({
 			mutationFn: async (data: TransferScheduledFormData) => {
-				await delay(3000);
-
+				await delay(1000);
 				addScheduledTransfer({
-					id: Crypto.randomUUID(),
-					amount: data.amount,
-					payeerDocument: data.payeerDocument,
-					scheduledDate: data.scheduledDate,
-					createdAt: new Date()
+					...data,
+					id: Crypto.randomUUID()
 				});
-
-				console.log({ data });
-				// return {
-				// 	...data,
-				// 	status: 'scheduled',
-				// 	transferDate: formatDate(new Date())
-				// };
 			},
 			onSuccess: () => {
 				setMessage({
@@ -110,12 +112,17 @@ export const TransferScheduledForm = ({
 				placeholder="Ingresa el número de documento"
 				disabled={isPendingTransfer}
 			/>
-			<FormInput
-				required
-				control={control}
-				name="scheduledDate"
+			<DateTimePickerField
+				value={scheduledDate}
+				onChange={(date) =>
+					setValue('scheduledDate', date, {
+						shouldValidate: true,
+						shouldDirty: true,
+						shouldTouch: true
+					})
+				}
 				label="Fecha de la transferencia"
-				placeholder="YYYY-MM-DD"
+				error={errors.scheduledDate?.message}
 				disabled={isPendingTransfer}
 			/>
 			<ThemedButton
