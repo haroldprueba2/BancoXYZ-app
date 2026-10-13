@@ -1,9 +1,40 @@
 import { Tabs } from 'expo-router';
-import { HouseIcon, SwapIcon } from 'phosphor-react-native';
+import {
+	ArrowsLeftRightIcon,
+	CalendarCheckIcon,
+	HouseIcon,
+	ListBulletsIcon,
+	type Icon
+} from 'phosphor-react-native';
 import { useThemeColors } from '@/hooks';
+
+interface TabItem {
+	name: string;
+	Icon: Icon;
+}
+
+const tabs: TabItem[] = [
+	{
+		name: 'home',
+		Icon: HouseIcon
+	},
+	{
+		name: 'transfer',
+		Icon: ArrowsLeftRightIcon
+	},
+	{
+		name: 'transfer-history',
+		Icon: ListBulletsIcon
+	},
+	{
+		name: 'transfer-scheduled',
+		Icon: CalendarCheckIcon
+	}
+];
 
 export default function TabsLayout() {
 	const colors = useThemeColors();
+
 	return (
 		<Tabs
 			screenOptions={{
@@ -22,24 +53,17 @@ export default function TabsLayout() {
 				popToTopOnBlur: true,
 				tabBarHideOnKeyboard: true
 			}}
-			backBehavior="order"
+			backBehavior="initialRoute"
 		>
-			<Tabs.Screen
-				name="home"
-				options={{
-					tabBarIcon: ({ color }) => (
-						<HouseIcon size={24} color={String(color)} />
-					)
-				}}
-			/>
-			<Tabs.Screen
-				name="transfer"
-				options={{
-					tabBarIcon: ({ color }) => (
-						<SwapIcon size={24} color={String(color)} />
-					)
-				}}
-			/>
+			{tabs.map(({ name, Icon }) => (
+				<Tabs.Screen
+					key={name}
+					name={name}
+					options={{
+						tabBarIcon: ({ color }) => <Icon size={24} color={String(color)} />
+					}}
+				/>
+			))}
 		</Tabs>
 	);
 }

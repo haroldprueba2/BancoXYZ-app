@@ -20,6 +20,7 @@ module.exports = {
 				muted: 'var(--muted)',
 				'muted-foreground': 'var(--muted-foreground)',
 				input: 'var(--input)',
+				border: 'var(--border)',
 				ring: 'var(--ring)',
 				destructive: 'var(--destructive)',
 				'destructive-focused': 'var(--destructive-focused)',

@@ -30,7 +30,7 @@ export const TransferForm = ({ balance, currency }: TransferFormProps) => {
 		type: 'success' | 'error';
 	} | null>(null);
 
-	const { control, handleSubmit, setFocus, reset } = useForm<TransferFormData>({
+	const { control, handleSubmit, reset } = useForm<TransferFormData>({
 		resolver: zodResolver(createTransferFormSchema(balance)),
 		mode: 'onChange',
 		defaultValues: {
@@ -73,19 +73,16 @@ export const TransferForm = ({ balance, currency }: TransferFormProps) => {
 
 	useFocusEffect(
 		useCallback(() => {
-			setFocus('amount');
-
 			return () => {
 				reset();
 				setMessage(null);
 			};
-		}, [reset, setFocus])
+		}, [reset])
 	);
 
 	return (
 		<View>
 			<FormAmountInput
-				autoFocus
 				required
 				keyboardType="number-pad"
 				control={control}

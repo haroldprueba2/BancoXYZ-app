@@ -3,3 +3,4 @@ export * from './Balance';
 export * from './AvailableBalance';
 export * from './FeedbackMessage';
 export * from './FormAmountInput';
+export * from './HomeActionItem';

@@ -11,7 +11,7 @@ export const ViewCard = ({ className, children, ...props }: ViewCardProps) => {
 	return (
 		<View
 			className={cn(
-				'rounded-2xl border border-input bg-card p-5 shadow-sm',
+				'rounded-2xl border border-border bg-card p-5 shadow-sm',
 				className
 			)}
 			{...props}
