@@ -1,6 +1,6 @@
 import * as axios from 'axios';
-import { StorageAdapter } from '@/infrastructure/adapters';
 import { parseAxiosError } from '@/utils';
+import { SecureStorageAdapter } from '@/infrastructure/adapters';
 
 const createAxiosClient = (baseURL: string | undefined, withAuth = true) => {
 	const axiosClient = axios.create({
@@ -15,7 +15,7 @@ const createAxiosClient = (baseURL: string | undefined, withAuth = true) => {
 	if (withAuth) {
 		axiosClient.interceptors.request.use(
 			async (config) => {
-				const token = await StorageAdapter.getItem('token');
+				const token = await SecureStorageAdapter.getItem('token');
 
 				if (token) {
 					config.headers.Authorization = `Bearer ${token}`;
