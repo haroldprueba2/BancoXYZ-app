@@ -19,7 +19,7 @@ export const HomeView = () => {
 
 	return (
 		<SafeAreaView className="flex-1">
-			<View className="flex-1 gap-6 p-6">
+			<View className="flex-1 gap-6 p-4">
 				<View className="flex-row items-center gap-2">
 					<View className="h-14 w-14 items-center justify-center rounded-full">
 						<UserCircleIcon size={36} color={colors.primary} weight="duotone" />

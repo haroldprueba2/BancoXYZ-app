@@ -12,7 +12,7 @@ export const TransferScheduledView = () => {
 	const { addScheduledTransfer } = useTransferScheduledStore();
 
 	return (
-		<View className="flex-1 p-6">
+		<View className="flex-1 p-4">
 			<ThemedText className="mb-6 text-base leading-6 text-muted-foreground">
 				Programa transferencias ingresando el monto, el documento del
 				destinatario y la fecha de ejecución.

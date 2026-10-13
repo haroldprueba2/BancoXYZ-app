@@ -94,7 +94,7 @@ export const TransferScheduledForm = ({
 
 	return (
 		<View className="mb-6">
-			<View className="flex gap-4 mb-2">
+			<View className="flex gap-2 mb-4">
 				<FormAmountInput
 					required
 					keyboardType="number-pad"

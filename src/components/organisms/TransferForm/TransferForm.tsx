@@ -82,33 +82,38 @@ export const TransferForm = ({ balance, currency }: TransferFormProps) => {
 
 	return (
 		<View>
-			<FormAmountInput
-				required
-				keyboardType="number-pad"
-				control={control}
-				name="amount"
-				label="Monto (USD)"
-				placeholder="Ej. 100"
-				disabled={isPendingTransfer}
-			/>
-			<FormInput
-				required
-				keyboardType="number-pad"
-				control={control}
-				name="payeerDocument"
-				label="Documento del destinatario"
-				placeholder="Ingresa el número de documento"
-				disabled={isPendingTransfer}
-			/>
+			<View className="flex gap-2 mb-4">
+				<FormAmountInput
+					required
+					keyboardType="number-pad"
+					control={control}
+					name="amount"
+					label="Monto (USD)"
+					placeholder="Ej. 100"
+					disabled={isPendingTransfer}
+				/>
+				<FormInput
+					required
+					keyboardType="number-pad"
+					control={control}
+					name="payeerDocument"
+					label="Documento del destinatario"
+					placeholder="Ingresa el número de documento"
+					disabled={isPendingTransfer}
+				/>
+			</View>
 			<ThemedButton
 				title="Enviar transferencia"
 				variant="secondary"
 				onPress={handleSubmit(onTransfer)}
 				iconLeft={<PaperPlaneTiltIcon />}
 				loading={isPendingTransfer}
-				className="my-6"
 			/>
-			{message && <FeedbackMessage text={message.text} type={message.type} />}
+			{message && (
+				<View className="mt-4">
+					<FeedbackMessage text={message.text} type={message.type} />
+				</View>
+			)}
 		</View>
 	);
 };

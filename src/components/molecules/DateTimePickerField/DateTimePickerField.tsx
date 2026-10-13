@@ -39,7 +39,7 @@ export const DateTimePickerField = ({
 			: 'default';
 
 	return (
-		<View className="mb-4 w-full">
+		<View className="w-full">
 			<View className="relative">
 				{label && (
 					<FormLabel
