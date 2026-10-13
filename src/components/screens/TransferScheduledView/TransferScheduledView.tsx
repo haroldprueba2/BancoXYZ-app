@@ -1,13 +1,16 @@
 import { View } from 'react-native';
-
-import { ThemedText } from '@/components/atoms';
+import { TransferScheduledForm } from '@/components/organisms';
+import { useTransferScheduledStore } from '@/modules/transfer/store/useTransferScheduledStore';
 
 export const TransferScheduledView = () => {
+	const { scheduledTransfers, addScheduledTransfer } =
+		useTransferScheduledStore();
+
+	console.log({ scheduledTransfers });
+
 	return (
 		<View className="flex-1 p-6">
-			<ThemedText className="mb-6 text-base leading-6 text-muted-foreground">
-				aca ira las transferencias programadas
-			</ThemedText>
+			<TransferScheduledForm addScheduledTransfer={addScheduledTransfer} />
 		</View>
 	);
 };
