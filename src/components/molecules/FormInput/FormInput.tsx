@@ -29,6 +29,7 @@ type FormInputProps<T extends FieldValues> = TextInputProps & {
 	disabled?: boolean;
 	isPassword?: boolean;
 	variant?: ThemedTextInputVariant;
+	className?: string;
 };
 
 export const FormInput = <T extends FieldValues>({
@@ -40,6 +41,7 @@ export const FormInput = <T extends FieldValues>({
 	disabled = false,
 	isPassword = false,
 	variant = 'outlined',
+	className,
 	...textInputProps
 }: FormInputProps<T>) => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -61,7 +63,7 @@ export const FormInput = <T extends FieldValues>({
 						: 'default';
 
 				return (
-					<View className="mb-4 w-full">
+					<View className={cn('w-full', className)}>
 						<View className="relative">
 							{label && (
 								<FormLabel

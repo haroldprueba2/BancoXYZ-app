@@ -7,7 +7,6 @@ interface TransferScheduledState {
 	scheduledTransfers: TransferScheduled[];
 	addScheduledTransfer: (transfer: TransferScheduled) => void;
 	removeScheduledTransfer: (id: string) => void;
-	clearExecutedTransfer: (id: string) => void;
 }
 
 export const useTransferScheduledStore = create<TransferScheduledState>()(
@@ -19,12 +18,6 @@ export const useTransferScheduledStore = create<TransferScheduledState>()(
 					scheduledTransfers: [transfer, ...state.scheduledTransfers]
 				})),
 			removeScheduledTransfer: (id) =>
-				set((state) => ({
-					scheduledTransfers: state.scheduledTransfers.filter(
-						(transfer) => transfer.id !== id
-					)
-				})),
-			clearExecutedTransfer: (id) =>
 				set((state) => ({
 					scheduledTransfers: state.scheduledTransfers.filter(
 						(transfer) => transfer.id !== id

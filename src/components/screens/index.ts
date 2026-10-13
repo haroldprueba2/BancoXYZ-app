@@ -4,3 +4,4 @@ export * from './WelcomeView';
 export * from './TransferView';
 export * from './TransferHistoryView';
 export * from './TransferScheduledView';
+export * from './TransferScheduledHistoryView';

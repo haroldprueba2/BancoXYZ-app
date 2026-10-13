@@ -12,6 +12,7 @@ import type {
 	ThemedTextInputVariant
 } from '@/components/atoms/ThemedTextInput';
 import { useThemeColors } from '@/hooks';
+import { cn } from '@/utils';
 
 type FormAmountInputProps<T extends FieldValues> = TextInputProps & {
 	name: FieldPath<T>;
@@ -20,6 +21,7 @@ type FormAmountInputProps<T extends FieldValues> = TextInputProps & {
 	required?: boolean;
 	disabled?: boolean;
 	variant?: ThemedTextInputVariant;
+	className?: string;
 };
 
 const isValidAmount = (value: string) => {
@@ -45,6 +47,7 @@ export const FormAmountInput = <T extends FieldValues>({
 	required = false,
 	disabled = false,
 	variant = 'outlined',
+	className,
 	...textInputProps
 }: FormAmountInputProps<T>) => {
 	const colors = useThemeColors();
@@ -66,7 +69,7 @@ export const FormAmountInput = <T extends FieldValues>({
 						: 'default';
 
 				return (
-					<View className="mb-4 w-full">
+					<View className={cn('w-full', className)}>
 						{label && (
 							<FormLabel
 								label={label}

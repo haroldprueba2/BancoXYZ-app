@@ -26,8 +26,9 @@ export default function TransferScheduledLayout() {
 				}
 			}}
 		>
+			<Stack.Screen name="index" options={{ title: 'Transferencia' }} />
 			<Stack.Screen
-				name="index"
+				name="history"
 				options={{ title: 'Transferencias Programadas' }}
 			/>
 		</Stack>

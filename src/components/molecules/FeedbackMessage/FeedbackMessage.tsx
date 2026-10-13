@@ -11,7 +11,7 @@ export const FeedbackMessage = ({ text, type }: FeedbackMessageProps) => {
 
 	return (
 		<View
-			className={`mb-2 rounded-xl p-3 ${
+			className={`rounded-xl p-3 ${
 				isSuccess ? 'bg-green-500/10' : 'bg-destructive-focused-background'
 			}`}
 		>

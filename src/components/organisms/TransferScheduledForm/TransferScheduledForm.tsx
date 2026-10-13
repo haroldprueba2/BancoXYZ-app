@@ -93,48 +93,52 @@ export const TransferScheduledForm = ({
 	);
 
 	return (
-		<View>
-			<FormAmountInput
-				required
-				keyboardType="number-pad"
-				control={control}
-				name="amount"
-				label="Monto (USD)"
-				placeholder="Ej. 100"
-				disabled={isPendingTransfer}
-			/>
-			<FormInput
-				required
-				keyboardType="number-pad"
-				control={control}
-				name="payeerDocument"
-				label="Documento del destinatario"
-				placeholder="Ingresa el número de documento"
-				disabled={isPendingTransfer}
-			/>
-			<DateTimePickerField
-				value={scheduledDate}
-				onChange={(date) =>
-					setValue('scheduledDate', date, {
-						shouldValidate: true,
-						shouldDirty: true,
-						shouldTouch: true
-					})
-				}
-				label="Fecha de la transferencia"
-				error={errors.scheduledDate?.message}
-				disabled={isPendingTransfer}
-			/>
+		<View className="mb-6">
+			<View className="flex gap-4 mb-2">
+				<FormAmountInput
+					required
+					keyboardType="number-pad"
+					control={control}
+					name="amount"
+					label="Monto (USD)"
+					placeholder="Ej. 100"
+					disabled={isPendingTransfer}
+				/>
+				<FormInput
+					required
+					keyboardType="number-pad"
+					control={control}
+					name="payeerDocument"
+					label="Documento del destinatario"
+					placeholder="Ingresa el número de documento"
+					disabled={isPendingTransfer}
+				/>
+				<DateTimePickerField
+					value={scheduledDate}
+					onChange={(date) =>
+						setValue('scheduledDate', date, {
+							shouldValidate: true,
+							shouldDirty: true,
+							shouldTouch: true
+						})
+					}
+					label="Fecha de la transferencia"
+					error={errors.scheduledDate?.message}
+					disabled={isPendingTransfer}
+				/>
+			</View>
 			<ThemedButton
 				title="Programar Transferencia"
 				variant="secondary"
 				onPress={handleSubmit(onTransfer)}
 				iconLeft={<CalendarPlusIcon />}
 				loading={isPendingTransfer}
-				className="my-6"
 			/>
-
-			{message && <FeedbackMessage text={message.text} type={message.type} />}
+			{message && (
+				<View className="mt-4">
+					<FeedbackMessage text={message.text} type={message.type} />
+				</View>
+			)}
 		</View>
 	);
 };
