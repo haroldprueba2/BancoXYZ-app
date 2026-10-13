@@ -55,3 +55,7 @@ export const axiosBalanceClient = createAxiosClient(
 export const axiosTransferClient = createAxiosClient(
 	process.env.EXPO_PUBLIC_TRANSFER_API_URL
 );
+
+export const axiosTransferHistoryClient = createAxiosClient(
+	process.env.EXPO_PUBLIC_TRANSFER_HISTORY_API_URL
+);
