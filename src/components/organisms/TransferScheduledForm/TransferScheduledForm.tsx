@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import * as Crypto from 'expo-crypto';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ThemedButton } from '@/components/atoms';
 import {
@@ -46,7 +47,7 @@ export const TransferScheduledForm = ({
 				await delay(3000);
 
 				addScheduledTransfer({
-					id: '123456789',
+					id: Crypto.randomUUID(),
 					amount: data.amount,
 					payeerDocument: data.payeerDocument,
 					scheduledDate: data.scheduledDate,
