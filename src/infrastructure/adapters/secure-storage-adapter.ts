@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 
-export class StorageAdapter {
+export class SecureStorageAdapter {
 	static async getItem(key: string): Promise<string | null> {
 		return SecureStore.getItemAsync(key);
 	}

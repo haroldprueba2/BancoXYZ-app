@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { postLogin } from '../services';
-import { StorageAdapter } from '@/infrastructure/adapters';
+import { SecureStorageAdapter } from '@/infrastructure/adapters';
 import type { AuthRequest, AuthResponse, AuthUser } from '../interfaces/auth';
 
 export interface AuthStoreState {
@@ -22,7 +22,7 @@ export const useAuthStore = create<AuthStoreState>()(
 				set({ loading: true });
 				try {
 					const resp = await postLogin(data);
-					await StorageAdapter.setItem('token', resp.token);
+					await SecureStorageAdapter.setItem('token', resp.token);
 					set({ isAuthenticated: true, user: resp.user });
 					return resp;
 				} catch (error) {
@@ -32,13 +32,13 @@ export const useAuthStore = create<AuthStoreState>()(
 				}
 			},
 			logout: async () => {
-				await StorageAdapter.removeItem('token');
+				await SecureStorageAdapter.removeItem('token');
 				set({ isAuthenticated: false, user: null });
 			}
 		}),
 		{
 			name: 'auth-storage',
-			storage: createJSONStorage(() => StorageAdapter),
+			storage: createJSONStorage(() => SecureStorageAdapter),
 			partialize: (state) => ({
 				isAuthenticated: state.isAuthenticated,
 				user: state.user

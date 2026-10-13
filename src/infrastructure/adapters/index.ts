@@ -1,1 +1,2 @@
-export * from './storage-adapter';
+export * from './secure-storage-adapter';
+export * from './async-storage-adapter';
