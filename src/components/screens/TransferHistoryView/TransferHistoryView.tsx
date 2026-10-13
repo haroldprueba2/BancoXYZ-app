@@ -1,13 +1,20 @@
 import { View } from 'react-native';
-
-import { ThemedText } from '@/components/atoms';
+import { useQuery } from '@tanstack/react-query';
+import { getTransfers } from '@/modules/transfer/services';
+import { TransferHistoryList } from '@/components/organisms';
 
 export const TransferHistoryView = () => {
+	const { data: dataTransfers, isLoading: isLoadingTransfers } = useQuery({
+		queryKey: ['transfers'],
+		queryFn: getTransfers
+	});
+
 	return (
-		<View className="flex-1 p-6">
-			<ThemedText className="mb-6 text-base leading-6 text-muted-foreground">
-				aca ira la lista
-			</ThemedText>
+		<View className="flex-1 pt-0 p-6">
+			<TransferHistoryList
+				data={dataTransfers?.transfers}
+				loading={isLoadingTransfers}
+			/>
 		</View>
 	);
 };

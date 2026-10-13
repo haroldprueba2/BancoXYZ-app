@@ -4,3 +4,4 @@ export * from './AvailableBalance';
 export * from './FeedbackMessage';
 export * from './FormAmountInput';
 export * from './HomeActionItem';
+export * from './TransferListItem';

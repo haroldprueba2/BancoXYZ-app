@@ -1,9 +1,9 @@
 export interface TransferListResponse {
 	message: string;
-	transfers: TransferItem[];
+	transfers: TransferListData[];
 }
 
-interface TransferItem {
+export interface TransferListData {
 	value: number;
 	date: string;
 	currency: string;
