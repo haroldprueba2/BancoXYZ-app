@@ -5,3 +5,4 @@ export * from './FeedbackMessage';
 export * from './FormAmountInput';
 export * from './HomeActionItem';
 export * from './TransferListItem';
+export * from './TransferFilterInput';

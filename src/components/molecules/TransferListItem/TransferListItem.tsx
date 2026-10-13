@@ -3,6 +3,7 @@ import { ThemedText } from '@/components/atoms';
 import { formatCurrency, formatDate } from '@/utils';
 import type { TransferListData } from '@/modules/transfer/interfaces';
 import { ArrowDownIcon } from 'phosphor-react-native';
+import { parseISO } from 'date-fns';
 
 interface TransferListItemProps {
 	transfer: TransferListData;
@@ -19,10 +20,7 @@ export const TransferListItem = ({ transfer }: TransferListItemProps) => {
 					{transfer.payeer.name}
 				</ThemedText>
 				<ThemedText className="text-xs text-muted-foreground">
-					{transfer.payeer.document}
-				</ThemedText>
-				<ThemedText className="text-xs text-muted-foreground">
-					{formatDate(new Date(transfer.date))}
+					{formatDate(parseISO(transfer.date))}
 				</ThemedText>
 			</View>
 			<View className="items-end gap-1">
