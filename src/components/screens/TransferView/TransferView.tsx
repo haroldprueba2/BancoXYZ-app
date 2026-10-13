@@ -12,7 +12,7 @@ export const TransferView = () => {
 	const currency = dataBalance?.currency ?? 'USD';
 
 	return (
-		<View className="m-6 flex-1">
+		<View className="flex-1 p-6">
 			<ThemedText className="mb-6 text-base leading-6 text-muted-foreground">
 				Realiza una transferencia ingresando el monto y el documento del
 				destinatario.
