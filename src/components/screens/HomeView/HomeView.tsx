@@ -1,21 +1,40 @@
-import { View } from 'react-native';
+import { Appearance, View, useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAuthStore } from '@/modules/auth/store/useAuthStore';
 import { getBalance } from '@/modules/balance/services';
-import { ThemedText } from '@/components/atoms';
+import { ThemedButton, ThemedText } from '@/components/atoms';
 import { Balance } from '@/components/molecules';
 import { HomeAction } from '@/components/organisms';
 import { useThemeColors } from '@/hooks';
-import { UserCircleIcon } from 'phosphor-react-native';
+import {
+	MoonIcon,
+	SignOutIcon,
+	SunIcon,
+	UserCircleIcon
+} from 'phosphor-react-native';
 
 export const HomeView = () => {
 	const colors = useThemeColors();
-	const { user } = useAuthStore();
+	const colorScheme = useColorScheme();
+	const { user, logout } = useAuthStore();
+	const queryClient = useQueryClient();
+	const isDark = colorScheme === 'dark';
+	const nextColorScheme = isDark ? 'light' : 'dark';
+	const ThemeIcon = nextColorScheme === 'light' ? SunIcon : MoonIcon;
 	const { data: dataBalance, isLoading: isLoadingBalance } = useQuery({
 		queryKey: ['balance'],
 		queryFn: getBalance
 	});
+
+	const handleToggleTheme = () => {
+		Appearance.setColorScheme(nextColorScheme);
+	};
+
+	const handleLogout = async () => {
+		await logout();
+		queryClient.clear();
+	};
 
 	return (
 		<SafeAreaView className="flex-1">
@@ -32,7 +51,26 @@ export const HomeView = () => {
 							{user?.name ?? 'Usuario'}
 						</ThemedText>
 					</View>
+
+					<ThemedButton
+						variant="icon"
+						fullWidth={false}
+						icon={
+							<ThemeIcon
+								size={22}
+								color={isDark ? colors.secondary : colors.primary}
+							/>
+						}
+						onPress={handleToggleTheme}
+					/>
+					<ThemedButton
+						variant="icon"
+						fullWidth={false}
+						icon={<SignOutIcon size={22} color={colors.destructive} />}
+						onPress={handleLogout}
+					/>
 				</View>
+
 				<Balance
 					balance={dataBalance?.accountBalance ?? 0}
 					currency={dataBalance?.currency ?? 'USD'}
