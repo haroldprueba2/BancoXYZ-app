@@ -1,37 +1,44 @@
 {
   "expo": {
-    "name": "BancoXYZ-app",
+    "name": "BancoXYZ",
     "slug": "BancoXYZ-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/adaptive-icon.png",
     "scheme": "bancoxyzapp",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "bundleIdentifier": "com.bancoxyz.app",
+      "icon": {
+        "dark": "./assets/images/ios-dark.png",
+        "light": "./assets/images/ios-light.png"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.bancoxyz"
+      "package": "com.bancoxyz.app"
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/adaptive-icon.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
+          "image": "./assets/images/splash-icon-dark.png",
           "backgroundColor": "#ffffff",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "dark": {
+            "image": "./assets/images/splash-icon-light.png",
+            "backgroundColor": "#000000"
+          }
         }
       ],
       "expo-secure-store",
