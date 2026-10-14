@@ -1,5 +1,5 @@
 import { FlatList, View } from 'react-native';
-import { ThemedText } from '@/components/atoms';
+import { Separator, ThemedText } from '@/components/atoms';
 import { TransferScheduledListItem } from '@/components/molecules/TransferScheduledListItem/TransferScheduledListItem';
 import type { TransferScheduled } from '@/modules/transfer/interfaces';
 
@@ -14,7 +14,6 @@ export const TransferScheduledList = ({
 }: TransferScheduledListProps) => {
 	return (
 		<FlatList
-			className="flex-1"
 			data={data}
 			renderItem={({ item }) => (
 				<TransferScheduledListItem
@@ -23,6 +22,7 @@ export const TransferScheduledList = ({
 				/>
 			)}
 			keyExtractor={(item) => item.id}
+			ItemSeparatorComponent={Separator}
 			contentContainerStyle={{ flexGrow: 1, padding: 12 }}
 			ListEmptyComponent={
 				<View className="flex-1 items-center justify-center py-6">
