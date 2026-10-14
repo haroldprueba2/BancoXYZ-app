@@ -7,7 +7,7 @@ import {
 } from '@/modules/auth/validation/loginFormSchema';
 import { useAuthStore } from '@/modules/auth/store/useAuthStore';
 import { BankTitle, ThemedButton, ThemedText } from '@/components/atoms';
-import { FormInput } from '@/components/molecules';
+import { FeedbackMessage, FormInput } from '@/components/molecules';
 import { setFormError } from '@/utils';
 import { ApiError } from '@/infrastructure/interfaces';
 import { SignInIcon } from 'phosphor-react-native';
@@ -49,41 +49,36 @@ export const LoginView = () => {
 		<View className="flex-1 justify-center m-6">
 			<View className="mb-10 gap-2">
 				<BankTitle />
-
 				<ThemedText className="text-3xl font-bold text-foreground">
 					Accede a tu cuenta
 				</ThemedText>
-
 				<ThemedText className="text-base text-muted-foreground">
 					Ingresa tus datos para continuar
 				</ThemedText>
 			</View>
-			<FormInput
-				autoFocus
-				required
-				autoCapitalize="none"
-				keyboardType="email-address"
-				control={control}
-				name="email"
-				label="Email"
-				placeholder="Ingresa tu email"
-				disabled={loading}
-			/>
-			<FormInput
-				required
-				control={control}
-				autoCapitalize="none"
-				name="password"
-				label="Contraseña"
-				placeholder="Ingresa tu contraseña"
-				isPassword={true}
-				disabled={loading}
-			/>
-			{errors.root && (
-				<ThemedText className="mb-4 text-destructive">
-					{errors.root.message}
-				</ThemedText>
-			)}
+			<View className="flex gap-2">
+				<FormInput
+					autoFocus
+					required
+					autoCapitalize="none"
+					keyboardType="email-address"
+					control={control}
+					name="email"
+					label="Email"
+					placeholder="Ingresa tu email"
+					disabled={loading}
+				/>
+				<FormInput
+					required
+					control={control}
+					autoCapitalize="none"
+					name="password"
+					label="Contraseña"
+					placeholder="Ingresa tu contraseña"
+					isPassword={true}
+					disabled={loading}
+				/>
+			</View>
 			<ThemedButton
 				title="Iniciar Sesión"
 				variant="secondary"
@@ -92,6 +87,11 @@ export const LoginView = () => {
 				className="mt-5"
 				loading={loading}
 			/>
+			{errors.root?.message && (
+				<View className="mt-4">
+					<FeedbackMessage text={errors.root.message} type="error" />
+				</View>
+			)}
 		</View>
 	);
 };

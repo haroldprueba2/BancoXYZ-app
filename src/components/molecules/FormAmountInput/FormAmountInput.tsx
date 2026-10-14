@@ -12,7 +12,7 @@ import type {
 	ThemedTextInputVariant
 } from '@/components/atoms/ThemedTextInput';
 import { useThemeColors } from '@/hooks';
-import { cn } from '@/utils';
+import { cn, formatAmount, isValidAmount } from '@/utils';
 
 type FormAmountInputProps<T extends FieldValues> = TextInputProps & {
 	name: FieldPath<T>;
@@ -22,22 +22,6 @@ type FormAmountInputProps<T extends FieldValues> = TextInputProps & {
 	disabled?: boolean;
 	variant?: ThemedTextInputVariant;
 	className?: string;
-};
-
-const isValidAmount = (value: string) => {
-	const [integer, decimals] = value.split('.');
-	return (
-		/^\d*$/.test(integer) &&
-		(decimals === undefined || /^\d{0,2}$/.test(decimals))
-	);
-};
-
-const formatAmount = (value: string) => {
-	const [integerPart, decimalPart] = value.split('.');
-	const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	return decimalPart === undefined
-		? formattedInteger
-		: `${formattedInteger}.${decimalPart}`;
 };
 
 export const FormAmountInput = <T extends FieldValues>({
