@@ -1,7 +1,6 @@
 import { Stack, useRouter } from 'expo-router';
-import { TouchableOpacity } from 'react-native';
-import { ArrowLeftIcon } from 'phosphor-react-native';
 import { useThemeColors } from '@/hooks';
+import { BackButton } from '@/components/atoms';
 
 export default function TransferHistoryLayout() {
 	const router = useRouter();
@@ -16,11 +15,7 @@ export default function TransferHistoryLayout() {
 				headerTitleAlign: 'center',
 				headerShadowVisible: false,
 				animation: 'slide_from_right',
-				headerLeft: () => (
-					<TouchableOpacity onPress={() => router.back()}>
-						<ArrowLeftIcon size={24} color={colors.secondary} />
-					</TouchableOpacity>
-				),
+				headerLeft: () => <BackButton onPress={() => router.back()} />,
 				contentStyle: {
 					backgroundColor: colors.background
 				}

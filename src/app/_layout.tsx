@@ -1,11 +1,10 @@
 import '../../global.css';
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
 import { Stack, usePathname, useRouter } from 'expo-router';
 import { AppContextProvider } from '@/context/AppContext';
 import { useAuthStore } from '@/modules/auth/store/useAuthStore';
 import { useThemeColors } from '@/hooks';
-import { ArrowLeftIcon } from 'phosphor-react-native';
+import { BackButton } from '@/components/atoms';
 
 export default function AppLayout() {
 	return (
@@ -38,11 +37,7 @@ function AuthLayout() {
 					headerTitleAlign: 'center',
 					headerShadowVisible: false,
 					animation: 'slide_from_right',
-					headerLeft: () => (
-						<TouchableOpacity onPress={handleBack}>
-							<ArrowLeftIcon size={24} color={colors.secondary} />
-						</TouchableOpacity>
-					),
+					headerLeft: () => <BackButton onPress={handleBack} />,
 					contentStyle: {
 						backgroundColor: colors.background
 					}

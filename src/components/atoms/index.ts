@@ -8,3 +8,4 @@ export * from './PasswordVisibilityToggle';
 export * from './ViewCard';
 export * from './Skeleton';
 export * from './Separator';
+export * from './BackButton';
