@@ -4,11 +4,11 @@ import { useTransferScheduledStore } from '@/modules/transfer/store/useTransferS
 import { ThemedText } from '@/components/atoms';
 import { TransferScheduledForm } from '@/components/organisms';
 import { useThemeColors } from '@/hooks';
-import { CaretRightIcon, ListBulletsIcon } from 'phosphor-react-native';
+import { CaretRightIcon } from 'phosphor-react-native';
 
 export const TransferScheduledView = () => {
-	const colors = useThemeColors();
 	const router = useRouter();
+	const colors = useThemeColors();
 	const { addScheduledTransfer } = useTransferScheduledStore();
 
 	return (
@@ -19,21 +19,14 @@ export const TransferScheduledView = () => {
 			</ThemedText>
 			<TransferScheduledForm addScheduledTransfer={addScheduledTransfer} />
 			<Pressable
-				className="flex-row items-center rounded-xl border border-border bg-card p-4 active:opacity-70"
+				className="flex-row items-center justify-end gap-1 active:opacity-60"
 				onPress={() => router.push('/transfer-scheduled/history')}
+				accessibilityRole="link"
 			>
-				<View className="mr-3 h-10 w-10 items-center justify-center">
-					<ListBulletsIcon size={22} color={colors.primary} />
-				</View>
-				<View className="flex-1">
-					<ThemedText className="font-semibold">
-						Transferencias programadas
-					</ThemedText>
-					<ThemedText className="mt-1 text-sm text-muted-foreground">
-						Consulta tus próximas transferencias
-					</ThemedText>
-				</View>
-				<CaretRightIcon size={20} color={colors.mutedForeground} />
+				<ThemedText className="text-sm text-foreground underline">
+					Ver transferencias programadas
+				</ThemedText>
+				<CaretRightIcon size={16} color={colors.foreground} />
 			</Pressable>
 		</View>
 	);

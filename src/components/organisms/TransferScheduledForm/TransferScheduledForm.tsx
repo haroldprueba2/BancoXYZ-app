@@ -93,7 +93,7 @@ export const TransferScheduledForm = ({
 	);
 
 	return (
-		<View className="mb-6">
+		<View className="mb-4">
 			<View className="flex gap-2 mb-4">
 				<FormAmountInput
 					required

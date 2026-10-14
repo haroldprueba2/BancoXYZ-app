@@ -31,7 +31,7 @@ const actions: HomeActionData[] = [
 	},
 	{
 		title: 'Transferencias futuras',
-		description: 'Consulta tus transferencias programadas',
+		description: 'Programa y consulta tus transferencias',
 		path: '/transfer-scheduled',
 		Icon: CalendarCheckIcon
 	}
