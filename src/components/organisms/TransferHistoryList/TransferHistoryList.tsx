@@ -44,14 +44,14 @@ export const TransferHistoryList = ({
 					{loading ? (
 						<Loading className="text-secondary" size="large" />
 					) : (
-						<View className="flex gap-2">
+						<View className="flex gap-2 items-center">
 							{hasFilters && (
 								<ThemedButton
+									size="md"
 									title="Limpiar filtros"
-									size="sm"
 									variant="outline"
+									className="w-40 text-secondary"
 									onPress={onClearFilters}
-									className="w-60 text-secondary!"
 								/>
 							)}
 							<ThemedText className="text-center text-muted-foreground">

@@ -24,20 +24,19 @@ export const TransferFilterInput = ({
 	return (
 		<View
 			className={cn(
-				'h-11 min-w-0 flex-1 flex-row items-center rounded-lg border bg-background px-2',
+				'h-12 min-w-0 flex-1 flex-row items-center rounded-lg border bg-background px-2',
 				isFocused ? 'border-ring' : 'border-muted',
 				containerClassName
 			)}
 		>
 			{Icon && <Icon size={16} color={accentColor} />}
-
 			<TextInput
 				{...props}
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => setIsFocused(false)}
 				placeholderTextColor={colors.mutedForeground}
 				className={cn(
-					'ml-1 min-w-0 flex-1 p-0 text-sm text-foreground',
+					'ml-1 h-full min-w-0 flex-1 p-0 text-sm text-foreground',
 					className
 				)}
 			/>
