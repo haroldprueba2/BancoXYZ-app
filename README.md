@@ -78,8 +78,14 @@ Las rutas de navegación se definen en `src/app/`. Los componentes visuales se o
 
 ### 1. Clonar el repositorio
 
+Nota: inicialmente este es el repositorio original pero la cuenta fue suspendida al momento de subir un archivo release.
 ```bash
 git clone https://github.com/xh4rz/BancoXYZ-app.git
+```
+
+Nuevo github con la copia del repositorio.
+```bash
+git clone https://github.com/haroldprueba2/BancoXYZ-app.git
 ```
 
 Entrar en la carpeta del proyecto:
